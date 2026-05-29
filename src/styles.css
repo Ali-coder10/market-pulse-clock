@@ -34,24 +34,24 @@
   --color-bear: var(--bear);
   --font-display: var(--font-display);
   --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
 }
 
 :root {
   --radius: 0.75rem;
-  /* Deep trading desk */
-  --background: oklch(0.16 0.03 250);
+  --background: oklch(0.14 0.02 250);
   --foreground: oklch(0.96 0.01 250);
-  --card: oklch(0.21 0.035 250);
+  --card: oklch(0.2 0.03 250);
   --card-foreground: oklch(0.96 0.01 250);
-  --popover: oklch(0.21 0.035 250);
+  --popover: oklch(0.2 0.03 250);
   --popover-foreground: oklch(0.96 0.01 250);
-  --primary: oklch(0.82 0.17 90); /* gold */
+  --primary: oklch(0.82 0.17 90);
   --primary-foreground: oklch(0.16 0.03 250);
   --secondary: oklch(0.28 0.04 250);
   --secondary-foreground: oklch(0.96 0.01 250);
   --muted: oklch(0.26 0.03 250);
   --muted-foreground: oklch(0.72 0.02 250);
-  --accent: oklch(0.85 0.23 145); /* neon green */
+  --accent: oklch(0.85 0.23 145);
   --accent-foreground: oklch(0.16 0.03 250);
   --destructive: oklch(0.65 0.24 25);
   --destructive-foreground: oklch(0.98 0.01 250);
@@ -63,20 +63,19 @@
   --neon: oklch(0.85 0.23 145);
   --bear: oklch(0.65 0.24 25);
 
-  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Inter", "Space Grotesk", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-
-  --gradient-hero: radial-gradient(ellipse at top, oklch(0.28 0.08 260 / 0.6), transparent 60%),
-                   linear-gradient(180deg, oklch(0.16 0.03 250), oklch(0.12 0.02 250));
-  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.17 90), oklch(0.72 0.18 70));
-  --shadow-glow-gold: 0 0 40px -10px oklch(0.82 0.17 90 / 0.5);
-  --shadow-glow-neon: 0 0 30px -8px oklch(0.85 0.23 145 / 0.55);
-  --shadow-card: 0 10px 40px -15px oklch(0 0 0 / 0.6);
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
 }
 
-.dark {
-  --background: oklch(0.16 0.03 250);
-  --foreground: oklch(0.96 0.01 250);
+html.light-mode {
+  --background: oklch(0.98 0.01 90);
+  --foreground: oklch(0.18 0.02 250);
+  --muted: oklch(0.94 0.01 90);
+  --muted-foreground: oklch(0.45 0.02 250);
+  --card: oklch(0.99 0.005 90);
+  --border: oklch(0 0 0 / 8%);
+  --input: oklch(0 0 0 / 12%);
 }
 
 @layer base {
@@ -86,43 +85,40 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-feature-settings: "ss01", "cv11";
-    background-image:
-      linear-gradient(oklch(1 0 0 / 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(1 0 0 / 0.02) 1px, transparent 1px);
-    background-size: 48px 48px;
+    min-height: 100vh;
   }
   .font-mono { font-family: var(--font-mono); }
+  .font-serif { font-family: var(--font-serif); }
 }
 
 @layer utilities {
   .glass {
-    background: linear-gradient(135deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.02));
-    backdrop-filter: blur(20px);
-    border: 1px solid oklch(1 0 0 / 0.08);
+    background: linear-gradient(135deg, oklch(1 0 0 / 0.06), oklch(1 0 0 / 0.02));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid oklch(1 0 0 / 0.1);
   }
   .glass-gold {
-    background: linear-gradient(135deg, oklch(0.82 0.17 90 / 0.08), oklch(1 0 0 / 0.02));
-    border: 1px solid oklch(0.82 0.17 90 / 0.2);
+    background: linear-gradient(135deg, oklch(0.82 0.17 90 / 0.1), oklch(1 0 0 / 0.02));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid oklch(0.82 0.17 90 / 0.25);
   }
   .text-gold { color: var(--gold); }
   .text-neon { color: var(--neon); }
   .text-bear { color: var(--bear); }
   .bg-gold { background-color: var(--gold); }
   .bg-neon { background-color: var(--neon); }
-  .glow-gold { box-shadow: var(--shadow-glow-gold); }
-  .glow-neon { box-shadow: var(--shadow-glow-neon); }
-  .gradient-gold { background: var(--gradient-gold); }
-  .gradient-hero { background: var(--gradient-hero); }
+  .border-gold { border-color: var(--gold); }
+  .glow-gold { box-shadow: 0 0 40px -10px oklch(0.82 0.17 90 / 0.5); }
+  .gradient-gold { background: linear-gradient(135deg, oklch(0.82 0.17 90), oklch(0.72 0.18 70)); }
+
+  @keyframes pulseDot { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .animate-pulse-dot { animation: pulseDot 1.6s ease-in-out infinite; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .animate-fade-in { animation: fadeIn 0.5s ease-out; }
 
   @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
   .animate-ticker { animation: ticker 60s linear infinite; }
-
-  @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
-  .animate-pulse-dot { animation: pulseDot 1.8s ease-in-out infinite; }
-
-  @keyframes candleRise { 0%{transform:translateY(20px);opacity:0} 100%{transform:translateY(0);opacity:1} }
-  .animate-candle { animation: candleRise .8s ease-out backwards; }
-
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  .animate-float { animation: float 4s ease-in-out infinite; }
 }
