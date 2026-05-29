@@ -7,7 +7,6 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { PreferencesProvider } from "@/lib/preferences";
 
 import appCss from "../styles.css?url";
 
@@ -74,18 +73,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { name: "description", content: "A real-time trading clock app for traders to monitor global market times and session statuses." },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:description", content: "A real-time trading clock app for traders to monitor global market times and session statuses." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:description", content: "A real-time trading clock app for traders to monitor global market times and session statuses." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c41cfbb4-0757-4631-ab5c-8bf96cf837d5/id-preview-c96657f1--26ab7811-b9a9-40b1-a073-1debd96e7b75.lovable.app-1780054311381.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c41cfbb4-0757-4631-ab5c-8bf96cf837d5/id-preview-c96657f1--26ab7811-b9a9-40b1-a073-1debd96e7b75.lovable.app-1780054311381.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" },
       { rel: "stylesheet", href: appCss },
     ],
   }),
@@ -114,9 +117,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PreferencesProvider>
-        <Outlet />
-      </PreferencesProvider>
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Outlet />
     </QueryClientProvider>
   );
 }
