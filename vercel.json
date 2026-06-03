@@ -1,5 +1,0 @@
-{
-  "framework": "tanstack-start",
-  "buildCommand": "vite build",
-  "outputDirectory": ".output"
-}
