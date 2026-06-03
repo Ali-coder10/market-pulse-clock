@@ -1,0 +1,18 @@
+{
+  "framework": "tanstack-start",
+  "buildCommand": "vite build",
+  "outputDirectory": ".output",
+  "functions": {
+    ".output/server/index.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1",
+      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
+    },
+    { "src": "/(.*)", "dest": ".output/server/index.js" }
+  ]
+}
