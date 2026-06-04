@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Index() {
+export function Index() {
   const mounted = useMounted();
   const localTz = useMemo(() =>
     (typeof window !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : "UTC"),

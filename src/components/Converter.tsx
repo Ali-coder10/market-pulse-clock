@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ZONES = [
   { label: "UTC", tz: "UTC" },
@@ -14,17 +14,23 @@ const ZONES = [
 ];
 
 function localTz() {
+  if (typeof window === "undefined") return "UTC";
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
 export function Converter() {
-  const local = localTz();
-  const [time, setTime] = useState(() => {
-    const d = new Date();
-    return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
-  });
+  const [local, setLocal] = useState("UTC");
+  const [time, setTime] = useState("12:00");
   const [fromTz, setFromTz] = useState("UTC");
-  const [toTz, setToTz] = useState(local);
+  const [toTz, setToTz] = useState("UTC");
+
+  useEffect(() => {
+    const browserTz = localTz();
+    const d = new Date();
+    setLocal(browserTz);
+    setToTz(current => current === "UTC" ? browserTz : current);
+    setTime(`${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`);
+  }, []);
 
   // Build a Date that represents `time` interpreted in `fromTz`, today
   const convertDate = (() => {
@@ -49,11 +55,11 @@ export function Converter() {
 
   const fromOptions = [
     { label: `Your local — ${local}`, tz: local },
-    ...ZONES,
+    ...ZONES.filter(z => z.tz !== local),
   ];
   const toOptions = [
     { label: `Your local — ${local}`, tz: local },
-    ...ZONES,
+    ...ZONES.filter(z => z.tz !== local),
   ];
 
   const targetTime = new Intl.DateTimeFormat("en-GB", {
