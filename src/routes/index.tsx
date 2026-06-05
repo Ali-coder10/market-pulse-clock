@@ -36,17 +36,17 @@ export function Index() {
 
       <main className="min-h-screen text-foreground">
         {/* HERO CLOCK */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative">
-          <div className="text-[10px] uppercase tracking-[0.5em] text-muted-foreground mb-12 font-mono">
+        <section className="min-h-[85vh] flex flex-col items-center justify-center px-4 py-16 md:py-20 relative">
+          <div className="text-[10px] uppercase tracking-[0.5em] text-muted-foreground mb-10 md:mb-12 font-mono">
             Lumen · Premium Clock
           </div>
           {mounted && <MainClock tz={localTz} label={localCity} />}
         </section>
 
         {/* WORLD CLOCKS */}
-        <section id="world" className="max-w-6xl mx-auto px-4 md:px-8 py-20">
+        <section id="world" className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-20">
           <SectionHeader eyebrow="World Time" title="Five clocks. One glance." />
-          <div className="grid grid-cols-5 gap-3 md:gap-4 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 mt-10">
             <MiniClock label="UTC" tz="UTC" accent="gold" />
             <MiniClock label="Local" tz={localTz} accent="neon" />
             <MiniClock label="London" tz="Europe/London" />
