@@ -36,17 +36,17 @@ export function Index() {
 
       <main className="min-h-screen text-foreground">
         {/* HERO CLOCK */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative">
-          <div className="text-[10px] uppercase tracking-[0.5em] text-muted-foreground mb-12 font-mono">
+        <section className="min-h-[85vh] flex flex-col items-center justify-center px-4 py-16 md:py-20 relative">
+          <div className="text-[10px] uppercase tracking-[0.5em] text-muted-foreground mb-10 md:mb-12 font-mono">
             Lumen · Premium Clock
           </div>
           {mounted && <MainClock tz={localTz} label={localCity} />}
         </section>
 
         {/* WORLD CLOCKS */}
-        <section id="world" className="max-w-6xl mx-auto px-4 md:px-8 py-20">
+        <section id="world" className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-20">
           <SectionHeader eyebrow="World Time" title="Five clocks. One glance." />
-          <div className="grid grid-cols-5 gap-3 md:gap-4 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 mt-10">
             <MiniClock label="UTC" tz="UTC" accent="gold" />
             <MiniClock label="Local" tz={localTz} accent="neon" />
             <MiniClock label="London" tz="Europe/London" />
@@ -108,15 +108,18 @@ function MiniClock({ label, tz, accent }: { label: string; tz: string; accent?: 
   const get = (t: string) => parts.find(p => p.type === t)?.value ?? "--";
 
   const color = accent === "gold" ? "text-gold" : accent === "neon" ? "text-neon" : "text-foreground";
+  const ring = accent === "gold" ? "glass-gold" : "glass";
 
   return (
-    <div className="glass rounded-2xl p-3 md:p-5 transition-transform hover:scale-[1.03]">
-      <div className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 md:mb-3 truncate">{label}</div>
-      <div className={`font-mono text-base sm:text-xl md:text-3xl tabular-nums font-light ${color}`}>
-        {mounted ? get("hour") : "--"}<span className="opacity-40">:</span>{mounted ? get("minute") : "--"}
-        <span className="text-[0.6em] opacity-60 ml-0.5">:{mounted ? get("second") : "--"}</span>
+    <div className={`${ring} rounded-2xl p-5 md:p-6 transition-all hover:scale-[1.02] hover:-translate-y-0.5`}>
+      <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3 truncate">{label}</div>
+      <div className={`font-mono text-3xl md:text-4xl tabular-nums font-light flex items-baseline gap-1 ${color}`}>
+        <span>{mounted ? get("hour") : "--"}</span>
+        <span className="opacity-40">:</span>
+        <span>{mounted ? get("minute") : "--"}</span>
+        <span className="text-[0.55em] opacity-60 ml-1">:{mounted ? get("second") : "--"}</span>
       </div>
-      <div className="text-[8px] md:text-[10px] text-muted-foreground font-mono mt-2 md:mt-3 truncate">
+      <div className="text-[10px] text-muted-foreground font-mono mt-3 truncate">
         {mounted ? dateInTz(now, tz) : ""}
       </div>
     </div>
