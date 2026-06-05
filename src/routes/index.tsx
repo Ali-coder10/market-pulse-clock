@@ -46,7 +46,7 @@ export function Index() {
         {/* WORLD CLOCKS */}
         <section id="world" className="max-w-6xl mx-auto px-4 md:px-8 py-20">
           <SectionHeader eyebrow="World Time" title="Five clocks. One glance." />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
+          <div className="grid grid-cols-5 gap-3 md:gap-4 mt-10">
             <MiniClock label="UTC" tz="UTC" accent="gold" />
             <MiniClock label="Local" tz={localTz} accent="neon" />
             <MiniClock label="London" tz="Europe/London" />
