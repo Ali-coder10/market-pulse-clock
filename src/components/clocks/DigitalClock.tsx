@@ -20,7 +20,7 @@ export function DigitalClock({ tz, label }: { tz: string; label: string }) {
       <div
         className="font-mono font-extralight tabular-nums leading-none flex items-baseline gap-1 text-foreground"
         style={{
-          fontSize: `clamp(3.5rem, ${10 * prefs.size}vw, ${9 * prefs.size}rem)`,
+          fontSize: `clamp(2rem, ${10 * prefs.size}vw, ${9 * prefs.size}rem)`,
           textShadow: "0 0 40px oklch(0.82 0.17 90 / 0.35), 0 0 80px oklch(0.82 0.17 90 / 0.15)",
         }}
       >
