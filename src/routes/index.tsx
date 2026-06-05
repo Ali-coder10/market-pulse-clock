@@ -46,7 +46,7 @@ export function Index() {
         {/* WORLD CLOCKS */}
         <section id="world" className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-20">
           <SectionHeader eyebrow="World Time" title="Five clocks. One glance." />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 mt-10">
+          <div className="grid grid-cols-5 gap-2 sm:gap-3 md:gap-4 mt-10">
             <MiniClock label="UTC" tz="UTC" accent="gold" />
             <MiniClock label="Local" tz={localTz} accent="neon" />
             <MiniClock label="London" tz="Europe/London" />
@@ -111,15 +111,15 @@ function MiniClock({ label, tz, accent }: { label: string; tz: string; accent?: 
   const ring = accent === "gold" ? "glass-gold" : "glass";
 
   return (
-    <div className={`${ring} rounded-2xl p-5 md:p-6 transition-all hover:scale-[1.02] hover:-translate-y-0.5`}>
-      <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3 truncate">{label}</div>
-      <div className={`font-mono text-3xl md:text-4xl tabular-nums font-light flex items-baseline gap-1 ${color}`}>
+    <div className={`${ring} rounded-xl p-2 sm:p-3 md:p-4 transition-all hover:scale-[1.02]`}>
+      <div className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-1.5 md:mb-2 truncate">{label}</div>
+      <div className={`font-mono text-base sm:text-xl md:text-3xl tabular-nums font-light flex items-baseline gap-0.5 ${color}`}>
         <span>{mounted ? get("hour") : "--"}</span>
         <span className="opacity-40">:</span>
         <span>{mounted ? get("minute") : "--"}</span>
-        <span className="text-[0.55em] opacity-60 ml-1">:{mounted ? get("second") : "--"}</span>
+        <span className="text-[0.5em] opacity-60 ml-0.5">:{mounted ? get("second") : "--"}</span>
       </div>
-      <div className="text-[10px] text-muted-foreground font-mono mt-3 truncate">
+      <div className="text-[7px] sm:text-[8px] md:text-[10px] text-muted-foreground font-mono mt-1.5 md:mt-2 truncate">
         {mounted ? dateInTz(now, tz) : ""}
       </div>
     </div>
