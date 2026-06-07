@@ -7,6 +7,7 @@ const ZONES = [
   { label: "Tokyo (JST)", tz: "Asia/Tokyo" },
   { label: "Sydney (AEST)", tz: "Australia/Sydney" },
   { label: "Dubai (GST)", tz: "Asia/Dubai" },
+  { label: "Karachi (PKT)", tz: "Asia/Karachi" },
   { label: "Frankfurt (CET)", tz: "Europe/Berlin" },
   { label: "Hong Kong (HKT)", tz: "Asia/Hong_Kong" },
   { label: "Singapore (SGT)", tz: "Asia/Singapore" },
